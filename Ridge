@@ -1,0 +1,6 @@
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import cross_val_score, GridSearchCV, KFold
+from sklearn.linear_model import Ridge
+
+Ridge(alpha=1.0, fit_intercept=True, normalize=False, copy_X=True, max_iter=None, tol=1e-3, solver=”auto”, random_state=None)
