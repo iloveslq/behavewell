@@ -1,6 +1,35 @@
+#Ridge
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import cross_val_score, GridSearchCV, KFold
 from sklearn.linear_model import Ridge
 
-Ridge(alpha=1.0, fit_intercept=True, normalize=False, copy_X=True, max_iter=None, tol=1e-3, solver=”auto”, random_state=None)
+#Ridge(alpha=1.0, fit_intercept=True, normalize=False, copy_X=True, max_iter=None, tol=1e-3, solver=”auto”, random_state=None)
+#https://www.e-learn.cn/content/qita/574720
+#alpha正则化系数
+#fit_intercept截距,false则不会使用
+#normalize当截距为true时有效,为ture则归一化
+#copy_X,为true则被复制
+#max_iter共轭梯度求解器的最大迭代次数
+#tol求解方法精度
+#solver求解的程序 
+为auto自动选择求解器 
+为svd利用X的奇异值分解计算脊函数 
+cholesky使用scipy.linalg.solve得到一个闭合解
+sparse_cg使用共轭梯度求解器
+lsqr使用专用正规化最小二乘的常规
+sag使用随机平均梯度下降改进的
+#random_state对数据进行变换时使用伪随机数生成的种子
+
+#和LinearRegression类似的方法
+Ridge().fit(x1,y).coef_
+Ridge().fit(x1,y).intercept
+Ridge().fit(x1,y).predict(x1)
+
+#利用cross_val_score计算得分
+scores = cross_val_score(Ridge(),X,y,scoring='neg_mean_squared_error',cv=5)
+np.sqrt(-scores).mean()
+np.sqrt(-scores).std()
+
+#改变alpha值计算得分，变化不明显
+#使截距为0计算得分，很高
