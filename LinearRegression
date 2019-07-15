@@ -1,1 +1,33 @@
+#LinearRegression
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score, GridSearchCV, KFold
+from sklearn.metrics import mean_squared_error
 
+#LinearRegression(fit_intercept=True, normalize=False, copy_X=True, n_jobs=1)方法
+#fit_intercept: intercept截距,设为false时模型截距为0
+#normalize:仅在设定截距时有效,设为ture将使自变量normalize
+#copy_X:默认为True,否则X会被覆写
+#n_jobs:训练时占用资源，默认1，设为-1时占用所有cpu资源
+
+#fit方法
+#fit(X,y,sample_weight=None)
+#sample_weight为每个样本权重
+#调用coef_提取系数,predict提取预测值
+LinearRegression().fit(x1,y).coef_
+LinearRegression().fit(x1,y).predict(x1)
+
+
+#调用cross_val_score(model,X,y,scoring='',cv)方法
+#其中scoring参数参见 https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter
+#回归问题常用的是 neg_mean_squared_error
+#分类问题中常用的是 precision, recall, f1
+#返回了1*cv数的array
+scores = cross_val_score(LinearRegression(),X,y,scoring='neg_mean_squared_error',cv=5)
+
+#调用mean_squared_error方法计算均方误差
+mean_squared_error(y_p,y)
+
+
+#########################################实际操作遇到的问题###############################################
+1、改变LinearRegression()中参数fit_intercept，返回的系数矩阵未有变化
+2、cross_val_score返回的array中元素是负值，实际比较np.sqrt(-array).mean()和np.sqrt(-array).std()
