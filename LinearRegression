@@ -31,5 +31,5 @@ mean_squared_error(y_p,y)
 
 
 #########################################实际操作遇到的问题###############################################
-1、改变LinearRegression()中参数fit_intercept，返回的系数矩阵未有变化
+1、改变LinearRegression()中参数fit_intercept，返回的系数列数和x1列数一样，但是intercept方法返回的截距的确变了
 2、cross_val_score返回的array中元素是负值，实际比较np.sqrt(-array).mean()和np.sqrt(-array).std()
