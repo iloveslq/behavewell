@@ -1,1 +1,31 @@
 #Lasso
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import cross_val_score, GridSearchCV, KFold
+from sklearn.linear_model import Lasso
+
+#Ridge(alpha=1.0, fit_intercept=True, normalize=False, precompute=False, copy_X=True, max_iter=None, tol=1e-3, warm_start=False, positive=False, random_state=None,selection='cyclic')
+#alpha正则化系数
+#fit_intercept截距,false则不会使用
+#normalize当截距为true时有效,为ture则归一化
+#precompute 是否使用预计算的Gram矩阵加速 True False array-like,default=False
+#copy_X,为true则被复制
+#max_iter共轭梯度求解器的最大迭代次数
+#tol求解方法精度
+#warm_start True时重用之前调用的解决方案作为初始化,否则只需要删除前面的解决方案
+#positive True时系数为正
+#random_state对数据进行变换时使用伪随机数生成的种子
+#selection random时每次迭代更新一个随机系数
+
+#和LinearRegression类似的方法
+Ridge().fit(x1,y).coef_
+Ridge().fit(x1,y).intercept
+Ridge().fit(x1,y).predict(x1)
+
+#利用cross_val_score计算得分
+scores = cross_val_score(Lasso(),X,y,scoring='neg_mean_squared_error',cv=5)
+np.sqrt(-scores).mean()
+np.sqrt(-scores).std()
+
+#改变alpha值计算得分，变化不明显
+#使截距为0计算得分，很高
